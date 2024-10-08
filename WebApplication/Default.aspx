@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <section class="row" aria-labelledby="defaultTitle">
-            <h1 id="defaultTitle">CAL Submission Application</h1>
+            <h1 id="defaultTitle">CAL Application</h1>
             <p class="lead">Submit new registration applications and manage submitted applications.</p>
         </section>
         <div class="row flex-column flex-sm-row gap-4 gap-sm-0">
