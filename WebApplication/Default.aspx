@@ -6,8 +6,8 @@
             <h1 id="defaultTitle">CAL Submission Application</h1>
             <p class="lead">Submit new registration applications and manage submitted applications.</p>
         </section>
-        <div class="row">
-            <div class="col-6">
+        <div class="row flex-column flex-sm-row gap-4 gap-sm-0">
+            <div class="col-12 col-sm-6">
                 <div class="card" aria-labelledby="submitApplication">
                     <div class="card-body">
                         <h3 id="submitApplication" class="card-title">Submit an application</h3>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
                 <div class="card" aria-labelledby="reviewApplication">
                     <div class="card-body">
                         <h3 id="reviewApplication" class="card-title">Review submissions</h3>
