@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication.DataLib;
 
 namespace WebApplication.Forms
 {
@@ -11,7 +13,51 @@ namespace WebApplication.Forms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                return;
+            }
 
+            LoadSubmissions();
+        }
+
+        private void LoadSubmissions()
+        {
+            using (var context = new TechnicalTestDbEntities())
+            {
+                // This needs to be done in two steps since concatenating the disabilities can only be done once the data is loaded
+                // Otherwise there is an error due to the LINQ expression not being convertable to SQL
+                var data = context.Submissions.Select(s => new
+                {
+                    s.SubmissionId,
+                    s.FirstName,
+                    s.LastName,
+                    s.Email,
+                    s.LevelsOfStudy.LevelName,
+                    DisabilityNames = s.Disabilities.Select(d => d.DisabilityName),
+                    s.AdditionalRequirements
+                }).ToList().Select(s => new
+                {
+                    s.SubmissionId,
+                    s.FirstName,
+                    s.LastName,
+                    s.Email,
+                    s.LevelName,
+                    Disabilities = string.Join(", ", s.DisabilityNames),
+                    s.AdditionalRequirements
+                }).ToList();
+
+                SubmissionsTable.DataSource = data;
+                SubmissionsTable.DataBind();
+            }
+
+            foreach (GridViewRow row in SubmissionsTable.Rows)
+            {
+
+                var submissionId = SubmissionsTable.DataKeys[row.RowIndex].Value.ToString();
+                var viewDetailsButton = (Button)row.FindControl("ViewDetails");
+                viewDetailsButton.PostBackUrl = $"/Forms/Details?SubmissionId={submissionId}";
+            }
         }
     }
 }
