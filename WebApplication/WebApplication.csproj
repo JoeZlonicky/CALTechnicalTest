@@ -245,6 +245,7 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Forms\Details.aspx" />
     <Content Include="Forms\List.aspx" />
     <Content Include="Forms\Registration.aspx" />
     <Content Include="Global.asax" />
@@ -328,6 +329,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Details.aspx.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Forms\Details.aspx.designer.cs">
+      <DependentUpon>Details.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forms\List.aspx.cs">
       <DependentUpon>List.aspx</DependentUpon>
