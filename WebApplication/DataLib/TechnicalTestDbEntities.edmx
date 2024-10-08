@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TechnicalTestDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Disabilities">
+          <Key>
+            <PropertyRef Name="DisabilityId" />
+          </Key>
+          <Property Name="DisabilityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisabilityName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LevelsOfStudy">
+          <Key>
+            <PropertyRef Name="LevelOfStudyId" />
+          </Key>
+          <Property Name="LevelOfStudyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreferredPronouns">
+          <Key>
+            <PropertyRef Name="PreferredPronounsId" />
+          </Key>
+          <Property Name="PreferredPronounsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pronouns" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubmissionDisabilities">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+            <PropertyRef Name="DisabilityId" />
+          </Key>
+          <Property Name="SubmissionId" Type="int" Nullable="false" />
+          <Property Name="DisabilityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Submissions">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PreferredPronounsId" Type="int" />
+          <Property Name="LevelOfStudyId" Type="int" Nullable="false" />
+          <Property Name="IsInternationalStudent" Type="bit" Nullable="false" />
+          <Property Name="AdditionalRequirements" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_SubmissionDisabilities_Disabilities">
+          <End Role="Disabilities" Type="Self.Disabilities" Multiplicity="1" />
+          <End Role="SubmissionDisabilities" Type="Self.SubmissionDisabilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disabilities">
+              <PropertyRef Name="DisabilityId" />
+            </Principal>
+            <Dependent Role="SubmissionDisabilities">
+              <PropertyRef Name="DisabilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubmissionDisabilities_Submissions">
+          <End Role="Submissions" Type="Self.Submissions" Multiplicity="1" />
+          <End Role="SubmissionDisabilities" Type="Self.SubmissionDisabilities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Submissions">
+              <PropertyRef Name="SubmissionId" />
+            </Principal>
+            <Dependent Role="SubmissionDisabilities">
+              <PropertyRef Name="SubmissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submissions_LevelOfStudy">
+          <End Role="LevelsOfStudy" Type="Self.LevelsOfStudy" Multiplicity="1" />
+          <End Role="Submissions" Type="Self.Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelsOfStudy">
+              <PropertyRef Name="LevelOfStudyId" />
+            </Principal>
+            <Dependent Role="Submissions">
+              <PropertyRef Name="LevelOfStudyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submissions_PreferredPronouns">
+          <End Role="PreferredPronouns" Type="Self.PreferredPronouns" Multiplicity="0..1" />
+          <End Role="Submissions" Type="Self.Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredPronouns">
+              <PropertyRef Name="PreferredPronounsId" />
+            </Principal>
+            <Dependent Role="Submissions">
+              <PropertyRef Name="PreferredPronounsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechnicalTestDbModelStoreContainer">
+          <EntitySet Name="Disabilities" EntityType="Self.Disabilities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LevelsOfStudy" EntityType="Self.LevelsOfStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreferredPronouns" EntityType="Self.PreferredPronouns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubmissionDisabilities" EntityType="Self.SubmissionDisabilities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Submissions" EntityType="Self.Submissions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SubmissionDisabilities_Disabilities" Association="Self.FK_SubmissionDisabilities_Disabilities">
+            <End Role="Disabilities" EntitySet="Disabilities" />
+            <End Role="SubmissionDisabilities" EntitySet="SubmissionDisabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubmissionDisabilities_Submissions" Association="Self.FK_SubmissionDisabilities_Submissions">
+            <End Role="Submissions" EntitySet="Submissions" />
+            <End Role="SubmissionDisabilities" EntitySet="SubmissionDisabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submissions_LevelOfStudy" Association="Self.FK_Submissions_LevelOfStudy">
+            <End Role="LevelsOfStudy" EntitySet="LevelsOfStudy" />
+            <End Role="Submissions" EntitySet="Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submissions_PreferredPronouns" Association="Self.FK_Submissions_PreferredPronouns">
+            <End Role="PreferredPronouns" EntitySet="PreferredPronouns" />
+            <End Role="Submissions" EntitySet="Submissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechnicalTestDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Disability">
+          <Key>
+            <PropertyRef Name="DisabilityId" />
+          </Key>
+          <Property Name="DisabilityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisabilityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Submissions" Relationship="Self.SubmissionDisabilities" FromRole="Disabilities" ToRole="Submissions" />
+        </EntityType>
+        <EntityType Name="LevelsOfStudy">
+          <Key>
+            <PropertyRef Name="LevelOfStudyId" />
+          </Key>
+          <Property Name="LevelOfStudyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Submissions" Relationship="Self.FK_Submissions_LevelOfStudy" FromRole="LevelsOfStudy" ToRole="Submissions" />
+        </EntityType>
+        <EntityType Name="PreferredPronoun">
+          <Key>
+            <PropertyRef Name="PreferredPronounsId" />
+          </Key>
+          <Property Name="PreferredPronounsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pronouns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Submissions" Relationship="Self.FK_Submissions_PreferredPronouns" FromRole="PreferredPronouns" ToRole="Submissions" />
+        </EntityType>
+        <EntityType Name="Submission">
+          <Key>
+            <PropertyRef Name="SubmissionId" />
+          </Key>
+          <Property Name="SubmissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PreferredPronounsId" Type="Int32" />
+          <Property Name="LevelOfStudyId" Type="Int32" Nullable="false" />
+          <Property Name="IsInternationalStudent" Type="Boolean" Nullable="false" />
+          <Property Name="AdditionalRequirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LevelsOfStudy" Relationship="Self.FK_Submissions_LevelOfStudy" FromRole="Submissions" ToRole="LevelsOfStudy" />
+          <NavigationProperty Name="PreferredPronoun" Relationship="Self.FK_Submissions_PreferredPronouns" FromRole="Submissions" ToRole="PreferredPronouns" />
+          <NavigationProperty Name="Disabilities" Relationship="Self.SubmissionDisabilities" FromRole="Submissions" ToRole="Disabilities" />
+        </EntityType>
+        <Association Name="FK_Submissions_LevelOfStudy">
+          <End Role="LevelsOfStudy" Type="Self.LevelsOfStudy" Multiplicity="1" />
+          <End Role="Submissions" Type="Self.Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LevelsOfStudy">
+              <PropertyRef Name="LevelOfStudyId" />
+            </Principal>
+            <Dependent Role="Submissions">
+              <PropertyRef Name="LevelOfStudyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Submissions_PreferredPronouns">
+          <End Role="PreferredPronouns" Type="Self.PreferredPronoun" Multiplicity="0..1" />
+          <End Role="Submissions" Type="Self.Submission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredPronouns">
+              <PropertyRef Name="PreferredPronounsId" />
+            </Principal>
+            <Dependent Role="Submissions">
+              <PropertyRef Name="PreferredPronounsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SubmissionDisabilities">
+          <End Role="Disabilities" Type="Self.Disability" Multiplicity="*" />
+          <End Role="Submissions" Type="Self.Submission" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TechnicalTestDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Disabilities" EntityType="Self.Disability" />
+          <EntitySet Name="LevelsOfStudies" EntityType="Self.LevelsOfStudy" />
+          <EntitySet Name="PreferredPronouns" EntityType="Self.PreferredPronoun" />
+          <EntitySet Name="Submissions" EntityType="Self.Submission" />
+          <AssociationSet Name="FK_Submissions_LevelOfStudy" Association="Self.FK_Submissions_LevelOfStudy">
+            <End Role="LevelsOfStudy" EntitySet="LevelsOfStudies" />
+            <End Role="Submissions" EntitySet="Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Submissions_PreferredPronouns" Association="Self.FK_Submissions_PreferredPronouns">
+            <End Role="PreferredPronouns" EntitySet="PreferredPronouns" />
+            <End Role="Submissions" EntitySet="Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="SubmissionDisabilities" Association="Self.SubmissionDisabilities">
+            <End Role="Disabilities" EntitySet="Disabilities" />
+            <End Role="Submissions" EntitySet="Submissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TechnicalTestDbModelStoreContainer" CdmEntityContainer="TechnicalTestDbEntities">
+          <EntitySetMapping Name="Disabilities">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.Disability">
+              <MappingFragment StoreEntitySet="Disabilities">
+                <ScalarProperty Name="DisabilityId" ColumnName="DisabilityId" />
+                <ScalarProperty Name="DisabilityName" ColumnName="DisabilityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LevelsOfStudies">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.LevelsOfStudy">
+              <MappingFragment StoreEntitySet="LevelsOfStudy">
+                <ScalarProperty Name="LevelOfStudyId" ColumnName="LevelOfStudyId" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreferredPronouns">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.PreferredPronoun">
+              <MappingFragment StoreEntitySet="PreferredPronouns">
+                <ScalarProperty Name="PreferredPronounsId" ColumnName="PreferredPronounsId" />
+                <ScalarProperty Name="Pronouns" ColumnName="Pronouns" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Submissions">
+            <EntityTypeMapping TypeName="TechnicalTestDbModel.Submission">
+              <MappingFragment StoreEntitySet="Submissions">
+                <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PreferredPronounsId" ColumnName="PreferredPronounsId" />
+                <ScalarProperty Name="LevelOfStudyId" ColumnName="LevelOfStudyId" />
+                <ScalarProperty Name="IsInternationalStudent" ColumnName="IsInternationalStudent" />
+                <ScalarProperty Name="AdditionalRequirements" ColumnName="AdditionalRequirements" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SubmissionDisabilities" TypeName="TechnicalTestDbModel.SubmissionDisabilities" StoreEntitySet="SubmissionDisabilities">
+            <EndProperty Name="Disabilities">
+              <ScalarProperty Name="DisabilityId" ColumnName="DisabilityId" />
+            </EndProperty>
+            <EndProperty Name="Submissions">
+              <ScalarProperty Name="SubmissionId" ColumnName="SubmissionId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

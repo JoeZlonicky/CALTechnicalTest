@@ -233,34 +233,34 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="DataLib\TechnicalTestDb.Context.tt">
+    <Content Include="DataLib\TechnicalTestDbEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TechnicalTestDb.edmx</DependentUpon>
-      <LastGenOutput>TechnicalTestDb.Context.cs</LastGenOutput>
+      <DependentUpon>TechnicalTestDbEntities.edmx</DependentUpon>
+      <LastGenOutput>TechnicalTestDbEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataLib\TechnicalTestDb.tt">
+    <Content Include="DataLib\TechnicalTestDbEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TechnicalTestDb.edmx</DependentUpon>
-      <LastGenOutput>TechnicalTestDb.cs</LastGenOutput>
+      <DependentUpon>TechnicalTestDbEntities.edmx</DependentUpon>
+      <LastGenOutput>TechnicalTestDbEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Forms\List.aspx" />
     <Content Include="Forms\Registration.aspx" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="DataLib\TechnicalTestDb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TechnicalTestDb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DataLib\TechnicalTestDb.edmx.diagram">
-      <DependentUpon>TechnicalTestDb.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="DataLib\TechnicalTestDbEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TechnicalTestDbEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataLib\TechnicalTestDbEntities.edmx.diagram">
+      <DependentUpon>TechnicalTestDbEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -295,20 +295,32 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="DataLib\TechnicalTestDb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TechnicalTestDb.Context.tt</DependentUpon>
+    <Compile Include="DataLib\Disability.cs">
+      <DependentUpon>TechnicalTestDbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataLib\TechnicalTestDb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TechnicalTestDb.tt</DependentUpon>
+    <Compile Include="DataLib\LevelsOfStudy.cs">
+      <DependentUpon>TechnicalTestDbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataLib\TechnicalTestDb.Designer.cs">
+    <Compile Include="DataLib\PreferredPronoun.cs">
+      <DependentUpon>TechnicalTestDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLib\Submission.cs">
+      <DependentUpon>TechnicalTestDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLib\TechnicalTestDbEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TechnicalTestDb.edmx</DependentUpon>
+      <DependentUpon>TechnicalTestDbEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLib\TechnicalTestDbEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechnicalTestDbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataLib\TechnicalTestDbEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechnicalTestDbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
