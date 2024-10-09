@@ -16,6 +16,9 @@ Setup:
 Running:
 * Run in Visual Studios.
 
+Testing:
+* A small suite of unit tests can be run in Visual Studios.
+
 ## WCAG
 Used [w3.org](https://www.w3.org/TR/WCAG20-TECHS/) as reference.  
 
@@ -32,7 +35,8 @@ The following was taken into consideration regarding accessability:
 * Text identifies when email falls outside accepted format (G85).
 * Client-side validation is performed on all fields (SCR18).
 * Submission list uses table markup to present tabular information (H51)
-	* Zebra table styling is used to improved readability
+	* Zebra table styling is used to improved readability.
+	* Added an aria-label for the view details buttons that includes the submission id.
 * Responsive design maintains functionality at 200% zoom (G142)
 * Used browser tools to ensure every page meets text contrast criteria (G18)
 
@@ -43,8 +47,10 @@ The following was taken into consideration regarding accessability:
 	* `Disabilities` table stores disability names.
 	* `PreferredPronouns` table stores pronouns.
 	* `LevelsOfStudy` table stores education levels.
+	* `SubmissionDisabilities` table stores the many-to-many relationship between submissions and disabilities.
 	* `Disabilities`, `PreferredPronouns`, and `LevelsOfStudy` are populated for form options.
 * Configured Entity Framework as an ORM using database-first.
+* **Assumption:** The original data model / `.edmx` was named `TechnicalTestDb`, but this was changed to `TechnicalTestDbEntities` to match the specifications. The connection string is configured to connect to a database with name `TechnicalTestDb`. 
 
 **Default page:**
 * Updated card container to be responsive for mobile screens.
@@ -68,6 +74,7 @@ The following was taken into consideration regarding accessability:
 * Added custom validation to check that full name and confirm full name are equal.
 * Added required validation to all required fields.
 * Submit creates a new submission record and redirects to submission list.
+* The various database queries for populating the registration form are done asynchronously. 
 
 **Submission list page:**
 * Added responsive table to list basic submission information.
@@ -84,7 +91,8 @@ The following was taken into consideration regarding accessability:
 	* If I had more time I would have liked to have a proper 404 page.
 
 **Tests:**
-* As of now, none were implemented.
+* Didn't get around to developing unit tests for form validation.
+* Did add some basic unit tests for utility methods used on the submission list page.
 
 ## Screenshots
 **Registration**
