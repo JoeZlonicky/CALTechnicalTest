@@ -3,14 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Submissions</h1>
     <div class="table-responsive">
-        <asp:GridView ID="SubmissionsTable" runat="server" AutoGenerateColumns="false" DataKeyNames="SubmissionId" CssClass="table table-bordered">
+        <asp:GridView ID="SubmissionsTable" runat="server" AutoGenerateColumns="false" DataKeyNames="SubmissionId" CssClass="table table-striped table-bordered">
             <Columns>
-                <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
-                <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
+                <asp:BoundField DataField="FirstName" HeaderText="First&nbsp;Name"/>
+                <asp:BoundField DataField="LastName" HeaderText="Last&nbsp;Name"/>
                 <asp:BoundField DataField="Email" HeaderText="Email"/>
-                <asp:BoundField DataField="LevelName" HeaderText="Level of Study"/>
+                <asp:BoundField DataField="LevelName" HeaderText="Level&nbsp;of&nbsp;Study"/>
                 <asp:BoundField DataField="Disabilities" HeaderText="Disabilities"/>
-                <asp:BoundField DataField="AdditionalRequirements" HeaderText="Additional Requirements"/>
+                <asp:BoundField DataField="AdditionalRequirements" HeaderText="Additional&nbsp;Requirements"/>
                 <asp:TemplateField HeaderText="Actions">
                     <ItemTemplate>
                         <asp:Button ID="ViewDetails" runat="server" Text="View Details" CssClass="btn btn-primary btn-sm" />
@@ -19,4 +19,5 @@
             </Columns>
         </asp:GridView>
     </div>
+    <a href="/Forms/Registration" class="btn btn-primary">New Application</a>
 </asp:Content>
