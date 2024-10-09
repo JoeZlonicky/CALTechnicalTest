@@ -15,84 +15,93 @@ namespace WebApplication.Forms
     {
 
         /// <summary>
-        /// FirstName control.
+        /// FirstNameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FirstName;
+        protected global::System.Web.UI.WebControls.TextBox FirstNameInput;
 
         /// <summary>
-        /// LastName control.
+        /// LastNameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LastName;
+        protected global::System.Web.UI.WebControls.TextBox LastNameInput;
 
         /// <summary>
-        /// Email control.
+        /// EmailInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
+        protected global::System.Web.UI.WebControls.TextBox EmailInput;
 
         /// <summary>
-        /// PreferredPronouns control.
+        /// PreferredPronounsInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PreferredPronouns;
+        protected global::System.Web.UI.WebControls.DropDownList PreferredPronounsInput;
 
         /// <summary>
-        /// LevelOfStudy control.
+        /// LevelOfStudyInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList LevelOfStudy;
+        protected global::System.Web.UI.WebControls.DropDownList LevelOfStudyInput;
 
         /// <summary>
-        /// InternationalStudentStatus control.
+        /// InternationalStudentInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList InternationalStudentStatus;
+        protected global::System.Web.UI.WebControls.RadioButtonList InternationalStudentInput;
 
         /// <summary>
-        /// Disabilities control.
+        /// DisabilitiesInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList Disabilities;
+        protected global::System.Web.UI.WebControls.CheckBoxList DisabilitiesInput;
 
         /// <summary>
-        /// FullName control.
+        /// AdditionalAccessibilityInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FullName;
+        protected global::System.Web.UI.WebControls.TextBox AdditionalAccessibilityInput;
 
         /// <summary>
-        /// ConfirmFullName control.
+        /// FullNameInput control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ConfirmFullName;
+        protected global::System.Web.UI.WebControls.TextBox FullNameInput;
+
+        /// <summary>
+        /// ConfirmFullNameInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ConfirmFullNameInput;
     }
 }

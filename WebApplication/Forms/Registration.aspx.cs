@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +12,7 @@ namespace WebApplication.Forms
 {
     public partial class Registration : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
             {
@@ -18,12 +20,11 @@ namespace WebApplication.Forms
             }
 
             // Populate values from database
-            using (var context = new TechnicalTestDbEntities())
-            {
-                LoadPreferredPronouns(context);
-                LoadLevelsOfStudy(context);
-                LoadDisabilities(context);
-            }
+            await Task.WhenAll(
+                LoadPreferredPronouns(),
+                LoadLevelsOfStudy(),
+                LoadDisabilities()
+            );
         }
 
         protected void Submit(object sender, EventArgs e)
@@ -33,69 +34,103 @@ namespace WebApplication.Forms
                 return;
             }
 
+            
+            var selectedPronouns = PreferredPronounsInput.SelectedValue;
+            int? preferredPronounsId = null;
+            if (!string.IsNullOrEmpty(selectedPronouns))
+            {
+                preferredPronounsId = int.Parse(selectedPronouns);
+            }
+
+            var levelOfStudyId = int.Parse(LevelOfStudyInput.SelectedValue);
+            var isInternationalStudent = InternationalStudentInput.SelectedValue == "Yes";
+
             using (var context = new TechnicalTestDbEntities())
             {
+                var disabilities = GetSelectedDisabilities(context);
                 var newSubmission = new Submission
                 {
-                    FirstName = FirstName.Text,
-                    LastName = LastName.Text,
-                    Email = Email.Text,
-                    PreferredPronounsId = int.Parse(PreferredPronouns.SelectedValue),
-                    LevelOfStudyId = int.Parse(LevelOfStudy.SelectedValue),
-                    IsInternationalStudent = InternationalStudentStatus.SelectedValue == "Yes",
-                    Disabilities = new List<Disability>()
-
+                    FirstName = FirstNameInput.Text,
+                    LastName = LastNameInput.Text,
+                    Email = EmailInput.Text,
+                    PreferredPronounsId = preferredPronounsId,
+                    LevelOfStudyId = levelOfStudyId,
+                    IsInternationalStudent = isInternationalStudent,
+                    Disabilities = disabilities,
+                    AdditionalRequirements= AdditionalAccessibilityInput.Text
                 };
-
-                foreach (ListItem item in Disabilities.Items)
-                {
-                    if (item.Selected)
-                    {
-                        int id = int.Parse(item.Value);
-                        var disability = context.Disabilities.Find(id);
-                        newSubmission.Disabilities.Add(disability);
-                    }
-                }
 
                 context.Submissions.Add(newSubmission);
                 context.SaveChanges();
 
                 Response.Redirect("/Forms/List");
             }
-            
         }
 
-        private void LoadPreferredPronouns(TechnicalTestDbEntities context)
+        protected void ValidateFullNamesMatch(object source, ServerValidateEventArgs args)
         {
-            var pronouns = context.PreferredPronouns.ToList();
-            PreferredPronouns.DataSource = pronouns;
-            PreferredPronouns.DataTextField = "Pronouns";
-            PreferredPronouns.DataValueField = "PreferredPronounsId";
-            PreferredPronouns.DataBind();
-
-            // Start with nothing selected
-            PreferredPronouns.Items.Insert(0, string.Empty);
+            args.IsValid = FullNameInput.Text == ConfirmFullNameInput.Text;
         }
 
-        private void LoadLevelsOfStudy(TechnicalTestDbEntities context)
+        protected void ValidateDisabilitySelected(object source, ServerValidateEventArgs args)
         {
-            var levels = context.LevelsOfStudies.ToList();
-            LevelOfStudy.DataSource = levels;
-            LevelOfStudy.DataTextField = "LevelName";
-            LevelOfStudy.DataValueField = "LevelOfStudyId";
-            LevelOfStudy.DataBind();
-
-            // Start with nothing selected
-            LevelOfStudy.Items.Insert(0, string.Empty);
+            foreach (ListItem item in DisabilitiesInput.Items)
+            {
+                if (item.Selected)
+                {
+                    args.IsValid = true;
+                    return;
+                }
+            }
+            args.IsValid = false;
         }
 
-        private void LoadDisabilities(TechnicalTestDbEntities context)
+        async Task LoadPreferredPronouns()
         {
-            var disabilities = context.Disabilities.ToList();
-            Disabilities.DataSource = disabilities;
-            Disabilities.DataTextField = "DisabilityName";
-            Disabilities.DataValueField = "DisabilityId";
-            Disabilities.DataBind();
+            using (var context = new TechnicalTestDbEntities())
+            {
+                await BindListData(PreferredPronounsInput, context.PreferredPronouns, "Pronouns", "PreferredPronounsId");
+            }
+        }
+
+        async Task LoadLevelsOfStudy()
+        {
+            using (var context = new TechnicalTestDbEntities())
+            {
+                await BindListData(LevelOfStudyInput, context.LevelsOfStudies, "LevelName", "LevelOfStudyId");
+            }
+        }
+
+        async Task LoadDisabilities()
+        {
+            using (var context = new TechnicalTestDbEntities())
+            {
+                await BindListData(DisabilitiesInput, context.Disabilities, "DisabilityName", "DisabilityId");
+            }
+        }
+
+        async Task BindListData(ListControl control, DbSet dbSet, string textField, string valueField)
+        {
+            var data = await dbSet.ToListAsync();
+            control.DataSource = data;
+            control.DataTextField = textField;
+            control.DataValueField = valueField;
+            control.DataBind();
+        }
+
+        List<Disability> GetSelectedDisabilities(TechnicalTestDbEntities context)
+        {
+            var disabilities = new List<Disability>();
+            foreach (ListItem item in DisabilitiesInput.Items)
+            {
+                if (item.Selected)
+                {
+                    int id = int.Parse(item.Value);
+                    var disability = context.Disabilities.Find(id);
+                    disabilities.Add(disability);
+                }
+            }
+            return disabilities;
         }
     }
 }
