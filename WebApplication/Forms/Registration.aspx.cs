@@ -57,7 +57,8 @@ namespace WebApplication.Forms
                     LevelOfStudyId = levelOfStudyId,
                     IsInternationalStudent = isInternationalStudent,
                     Disabilities = disabilities,
-                    AdditionalRequirements= AdditionalAccessibilityInput.Text
+                    AdditionalRequirements= AdditionalAccessibilityInput.Text,
+                    CreatedAt = DateTime.Now
                 };
 
                 context.Submissions.Add(newSubmission);
