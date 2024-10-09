@@ -27,17 +27,25 @@ namespace WebApplication.Forms
             using (var db = new TechnicalTestDbEntities())
             {
                 var submission = db.Submissions.Find(submissionId) ?? throw new Exception("submissionId not found");
-                FullName.InnerText = $"{submission.FirstName} {submission.LastName}";
+                FirstName.InnerText = submission.FirstName;
+                LastName.InnerText = submission.LastName;
                 Email.InnerText = submission.Email;
                 PreferredPronouns.InnerText = submission.PreferredPronoun?.Pronouns ?? "N/A";
                 LevelOfStudy.InnerText = submission.LevelsOfStudy.LevelName;
-                InternationalStudentStatus.InnerText = submission.IsInternationalStudent ? "Yes" : "No";
+                InternationalStudent.InnerText = submission.IsInternationalStudent ? "Yes" : "No";
 
                 var disabilities = submission.Disabilities.Select(d => d.DisabilityName).ToList();
                 Disabilities.DataSource = disabilities;
                 Disabilities.DataBind();
 
-                AdditionalAccessibilityRequirements.InnerText = submission.AdditionalRequirements;
+                if (string.IsNullOrEmpty(submission.AdditionalRequirements))
+                {
+                    AdditionalAccessibilityRequirements.InnerText = "N/A";
+                } else
+                {
+                    AdditionalAccessibilityRequirements.InnerText = submission.AdditionalRequirements;
+                }
+                
             }
         }
     }

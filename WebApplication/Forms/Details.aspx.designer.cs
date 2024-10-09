@@ -15,13 +15,22 @@ namespace WebApplication.Forms
     {
 
         /// <summary>
-        /// FullName control.
+        /// FirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FullName;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FirstName;
+
+        /// <summary>
+        /// LastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LastName;
 
         /// <summary>
         /// Email control.
@@ -51,13 +60,13 @@ namespace WebApplication.Forms
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LevelOfStudy;
 
         /// <summary>
-        /// InternationalStudentStatus control.
+        /// InternationalStudent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl InternationalStudentStatus;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl InternationalStudent;
 
         /// <summary>
         /// Disabilities control.
