@@ -1,5 +1,5 @@
 # CAL Application
-An ASP.NET Web Form application for submitting and viewing CAL registration details. Uses Entity Framework (database-first).
+An ASP.NET Web Forms application for submitting and viewing CAL registration details. Uses Entity Framework (database-first).
 
 ## Running
 Requirements:
@@ -14,13 +14,15 @@ Setup:
   * `data source=...` will need to be updated at the very least.
 
 Running:
-* Run in Visual Studios
+* Run in Visual Studios.
 
 ## WCAG
-Used [w3.org](https://www.w3.org/TR/WCAG20-TECHS/) as reference.
+Used [w3.org](https://www.w3.org/TR/WCAG20-TECHS/) as reference.  
+
 The following was taken into consideration regarding accessability:
 * Every `input` element has a matching `label` element (H44).
-* Registration form is fully navigatable and editable using only keyboard (G202).
+* Registration form is fully navigatable and completable using only keyboard (G202).
+	* Other pages are also fully navigatable using only keyboard.
 * Required fields are marked with an asterisk (H90).
 	* This convention is declared at the top of the form.
 	* Each asterisk is an abbreviation with a "required" title.
@@ -36,22 +38,21 @@ The following was taken into consideration regarding accessability:
 
 ## Implementation
 **Database:**
-* Created SQL database initialization script
-	* `Submissions` table stores submission information
-	* `Disabilities` table stores disability names
-	* `PreferredPronouns` table stores pronouns
-	* `LevelsOfStudy` table stores education levels
-	* Foreign key constraints
-	* Populate `Disabilities`, `PreferredPronouns`, and `LevelsOfStudy` for form options
-* Configured Entity Framework as an ORM using database-first
+* Created SQL database initialization script:
+	* `Submissions` table stores submission information.
+	* `Disabilities` table stores disability names.
+	* `PreferredPronouns` table stores pronouns.
+	* `LevelsOfStudy` table stores education levels.
+	* `Disabilities`, `PreferredPronouns`, and `LevelsOfStudy` are populated for form options.
+* Configured Entity Framework as an ORM using database-first.
 
 **Default page:**
-* Updated card container to be responsive for mobile screens
-* Updated button text to improve clarity
-* Updated application name
+* Updated card container to be responsive for mobile screens.
+* Updated button text to improve clarity.
+* Updated application name.
 
 **Registration page:**
-* Added required fields explanation for a11y.
+* Added required fields explanation at top of page.
 * Added section for personal information.
 * Added email regex validation.
 * Populate preferred pronouns dropdown list from database table.
@@ -70,14 +71,14 @@ The following was taken into consideration regarding accessability:
 
 **Submission list page:**
 * Added responsive table to list basic submission information.
-* Added "View Details" action for each row
+* Added "View Details" action for each row.
 	* **Assumption:** I labelled them "View Details" instead of "View" to improve clarity.
 * Implemented a limit of 3 disabilities before an ellipses is used, to keep table concise since "View Details" shows the full list.
 * Implemented a 200 character limit on additional requirements before an ellipses is used.
 * Add a "New Application" button that goes to registration page.
 
 **Details page:**
-* **Assumption:** I didn't display a "full populated form" per-say, rather it just shows all the information in a formatted view. If I had more time I would have matched this idea closer and/or double-checked what the expected result of this feature is.
+* **Assumption:** I didn't display a "full populated form" per-say, rather it just shows all the information in a formatted view. If I had more time I would have matched this idea closer and/or double-checked what the desired result of this feature is.
 * Uses query parameter to fetch and display all submission data.
 * Sends a 404 status if query parameter is missing/invalid.
 	* If I had more time I would have liked to have a proper 404 page.
