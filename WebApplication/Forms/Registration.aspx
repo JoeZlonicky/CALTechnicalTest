@@ -24,21 +24,27 @@
         input[type="radio"]:not(:first-child) {
             margin-left: 16px;
         }
+
+        abbr.text-danger {
+            font-size: 125%;
+        }
     </style>
     <h1>Register with CAL</h1>
     <p>Please complete the form below and click the 'Submit' button when you are done. The 'Submit' button is located at the very bottom of this page.</p>
     <hr />
 
+    <p>Required fields are marked with an asterisk<abbr class="text-danger" title="required">*</abbr>.</p>
     <fieldset class="border p-4">
         <legend>Personal Information</legend>
         <!-- First name -->
         <div class="row align-items-center">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="FirstNameInput" CssClass="form-label">First name:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="FirstNameInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> First name:
+                </asp:Label>
             </div>
             <div class="col-auto">
-                <asp:TextBox runat="server" ID="FirstNameInput" CssClass="form-control" AutoCompleteType="FirstName" />
+                <asp:TextBox runat="server" ID="FirstNameInput" CssClass="form-control" AutoCompleteType="FirstName"/>
             </div>
             <div class="col-auto">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="FirstNameInput" CssClass="text-danger" Display="Dynamic" ErrorMessage="First name is required." />
@@ -48,8 +54,9 @@
         <!-- Last name -->
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="LastNameInput" CssClass="form-label">Last name:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="LastNameInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Last name:
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:TextBox runat="server" ID="LastNameInput" CssClass="form-control" AutoCompleteType="LastName"/>
@@ -62,8 +69,9 @@
         <!-- Email -->
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="EmailInput" CssClass="form-label">Email:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="EmailInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Email:
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:TextBox runat="server" ID="EmailInput" CssClass="form-control" AutoCompleteType="Email"/>
@@ -79,7 +87,9 @@
         <!-- Preferred Pronouns (Populated by server) -->
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <asp:Label runat="server" AssociatedControlID="PreferredPronounsInput" CssClass="form-label">Preferred pronouns:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="PreferredPronounsInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Preferred pronouns:
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:DropDownList runat="server" ID="PreferredPronounsInput" CssClass="form-select" AppendDataBoundItems="true">
@@ -95,8 +105,9 @@
         <!-- Level of Study (Populated by server) -->
         <div class="row align-items-center">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="LevelOfStudyInput" CssClass="form-label">At what level are you studying?</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="LevelOfStudyInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> At what level are you studying?
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:DropDownList runat="server" ID="LevelOfStudyInput" CssClass="form-select" AppendDataBoundItems="true">
@@ -111,8 +122,9 @@
         <!-- International Student Status -->
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="InternationalStudentInput" CssClass="form-label">Are you an international student?</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="InternationalStudentInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Are you an international student?
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:RadioButtonList runat="server" ID="InternationalStudentInput" RepeatLayout="Flow" RepeatDirection="Horizontal">
@@ -131,8 +143,9 @@
 
         <!-- Disabilities (populated by server) -->
         <div>
-            <span class="text-danger">*</span>
-            <asp:Label runat="server" AssociatedControlID="DisabilitiesInput" CssClass="form-label">Why are you registering with CAL?</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="DisabilitiesInput" CssClass="form-label">
+                <abbr class="text-danger" title="required">*</abbr> Why are you registering with CAL?
+            </asp:Label>
             <asp:CheckBoxList runat="server" ID="DisabilitiesInput" repeatDirection="Vertical"/>
             <asp:CustomValidator runat="server" ClientValidationFunction="ClientValidateDisabilitySelected" OnServerValidate="ValidateDisabilitySelected" CssClass="text-danger" Display="Dynamic" ErrorMessage="Why are you registering with CAL? is required."/>
         </div>
@@ -153,8 +166,9 @@
 
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="FullNameInput" CssClass="form-label">Full name:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="FullNameInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Full name:
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:TextBox runat="server" ID="FullNameInput" CssClass="form-control"/>
@@ -166,8 +180,9 @@
 
         <div class="row align-items-center mt-2">
             <div class="col-auto">
-                <span class="text-danger">*</span>
-                <asp:Label runat="server" AssociatedControlID="ConfirmFullNameInput" CssClass="form-label">Confirm full name:</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="ConfirmFullNameInput" CssClass="form-label">
+                    <abbr class="text-danger" title="required">*</abbr> Confirm full name:
+                </asp:Label>
             </div>
             <div class="col-auto">
                 <asp:TextBox runat="server" ID="ConfirmFullNameInput" CssClass="form-control"/>
