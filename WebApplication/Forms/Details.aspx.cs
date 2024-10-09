@@ -26,7 +26,13 @@ namespace WebApplication.Forms
         {
             using (var db = new TechnicalTestDbEntities())
             {
-                var submission = db.Submissions.Find(submissionId) ?? throw new Exception("submissionId not found");
+                var submission = db.Submissions.Find(submissionId);
+                if (submission == null)
+                {
+                    Response.StatusCode = 404;
+                    Response.End();
+                    return;
+                }
                 FirstName.InnerText = submission.FirstName;
                 LastName.InnerText = submission.LastName;
                 Email.InnerText = submission.Email;
