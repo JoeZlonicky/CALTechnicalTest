@@ -15,14 +15,13 @@
             margin-right: 2px;
         }
 
-        /* Just a quick fix due to time limit */
         #<%=InternationalStudentInput.ClientID%> {
-            height: 32px;
+            margin-bottom: 4px;
             display: inline-block;
         }
 
         input[type="radio"]:not(:first-child) {
-            margin-left: 16px;
+            margin-left: 20px;
         }
 
         abbr.text-danger {
@@ -88,7 +87,7 @@
         <div class="row align-items-center mt-2">
             <div class="col-auto">
                 <asp:Label runat="server" AssociatedControlID="PreferredPronounsInput" CssClass="form-label">
-                    <abbr class="text-danger" title="required">*</abbr> Preferred pronouns:
+                    Preferred pronouns:
                 </asp:Label>
             </div>
             <div class="col-auto">
