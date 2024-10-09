@@ -59,7 +59,7 @@ namespace WebApplication.Forms
                 viewDetailsButton.Attributes["aria-label"] = $"View details for submission {submissionId}";
             }
         }
-        static string ConcatDisabilityNames(IEnumerable<string> disabilityNames)
+        public static string ConcatDisabilityNames(IEnumerable<string> disabilityNames)
         {
             if (disabilityNames.Count() <= 3) { 
                 return string.Join(", ", disabilityNames);
@@ -69,7 +69,7 @@ namespace WebApplication.Forms
             return firstThree + ", ...";
         }
 
-        static string LimitStringLength(string s, int maxLength)
+        public static string LimitStringLength(string s, int maxLength)
         {
             if (s != null && s.Length > maxLength)
             {
