@@ -190,7 +190,7 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmFullNameInput" CssClass="text-danger" Display="Dynamic" ErrorMessage="Confirm full name is required." />
             </div>
             <div class="col-auto">
-                <asp:CustomValidator runat="server" ClientValidationFunction="ClientValidateFullNamesMatch" OnServerValidate="ValidateFullNamesMatch" CssClass="text-danger" Display="Dynamic" ErrorMessage="Confirm full name does not match."/>
+                <asp:CustomValidator runat="server" ClientValidationFunction="ClientValidateFullNamesMatch" ControlToValidate="ConfirmFullNameInput" OnServerValidate="ValidateFullNamesMatch" CssClass="text-danger" Display="Dynamic" ErrorMessage="Confirm full name does not match."/>
             </div>
         </div>
     </fieldset>
