@@ -15,7 +15,7 @@
             margin-right: 2px;
         }
 
-        #<%=InternationalStudentInput.ClientID%> {
+        #MainContent_InternationalStudentInput {
             margin-bottom: 4px;
             display: inline-block;
         }
@@ -32,7 +32,7 @@
     <p>Please complete the form below and click the 'Submit' button when you are done. The 'Submit' button is located at the very bottom of this page.</p>
     <hr />
 
-    <p>Required fields are marked with an asterisk<abbr class="text-danger" title="required">*</abbr>.</p>
+    <p>Required fields are marked with an asterisk <abbr class="text-danger" title="required">*</abbr>.</p>
     <fieldset class="border p-4">
         <legend>Personal Information</legend>
         <!-- First name -->

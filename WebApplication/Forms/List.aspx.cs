@@ -36,7 +36,7 @@ namespace WebApplication.Forms
                     s.LevelsOfStudy.LevelName,
                     DisabilityNames = s.Disabilities.Select(d => d.DisabilityName),
                     s.AdditionalRequirements
-                }).ToList().Select(s => new
+                }).OrderBy(s => s.SubmissionId).ToList().Select(s => new
                 {
                     s.SubmissionId,
                     s.FirstName,
@@ -56,6 +56,7 @@ namespace WebApplication.Forms
                 var submissionId = SubmissionsTable.DataKeys[row.RowIndex].Value.ToString();
                 var viewDetailsButton = (Button)row.FindControl("ViewDetails");
                 viewDetailsButton.PostBackUrl = $"/Forms/Details?SubmissionId={submissionId}";
+                viewDetailsButton.Attributes["aria-label"] = $"View details for submission {submissionId}";
             }
         }
         static string ConcatDisabilityNames(IEnumerable<string> disabilityNames)
