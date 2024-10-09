@@ -1,121 +1,86 @@
-# Technical Test: Accessible Web Forms Application in C\#
+# CAL Application
+An ASP.NET Web Form application for submitting and viewing CAL registration details. Uses Entity Framework (database-first).
 
-## Objective
+## Running
+Requirements:
+* Visual Studio (developed with 2022)
+* .NET Framework 4.8
+* SQL Server (developed with SQL Server 2022 Developer)
 
-Develop a basic web application using ASP.NET Web Forms and Entity Framework that allows users to submit and view registration details. Focus on making the application accessible, adhering to WCAG standards.
+Setup:
+* Database needs to be named `TechnicalTestDb` and tables need to be set-up using `InitializeDatabase.sql`.
+* SQL Server needs to be running.
+* The connectionString in `WebApplication/Web.config` needs to be configured.
+  * `data source=...` will need to be updated at the very least.
 
-## Length of the Test
+Running:
+* Run in Visual Studios
 
-This is a timed technical test so you must make your last commit and push your project to GitHub within 48 hours of your start time, which will be communicated via email.
+## WCAG
+Used [w3.org](https://www.w3.org/TR/WCAG20-TECHS/) as reference.
+The following was taken into consideration regarding accessability:
+* Every `input` element has a matching `label` element (H44).
+* Registration form is fully navigatable and editable using only keyboard (G202).
+* Required fields are marked with an asterisk (H90).
+	* This convention is declared at the top of the form.
+	* Each asterisk is an abbreviation with a "required" title.
+	* Asterisk size is increased for those with impaired vision.
+* The first element insides each fieldset is a `legend` element (H71).
+* Text identifies required fields that were not completed (G83).
+* Text identifies when email falls outside accepted format (G85).
+* Client-side validation is performed on all fields (SCR18).
+* Submission list uses table markup to present tabular information (H51)
+	* Zebra table styling is used to improved readability
+* Responsive design maintains functionality at 200% zoom (G142)
+* Used browser tools to ensure every page meets text contrast criteria (G18)
 
-## Pre-requisites
+## Implementation
+**Database:**
+* Created SQL database initialization script
+	* `Submissions` table stores submission information
+	* `Disabilities` table stores disability names
+	* `PreferredPronouns` table stores pronouns
+	* `LevelsOfStudy` table stores education levels
+	* Foreign key constraints
+	* Populate `Disabilities`, `PreferredPronouns`, and `LevelsOfStudy` for form options
+* Configured Entity Framework as an ORM using database-first
 
-You will need the following software installed in your machine to do this test:
+**Default page:**
+* Updated card container to be responsive for mobile screens
+* Updated button text to improve clarity
+* Updated application name
 
-- Visual Studio 2022 (recommended)
-- .NET Framework 4.8 targeting pack
-- SQL Server Developer or SQL Server Express
-- SQL Server Management Studio
+**Registration page:**
+* Added required fields explanation for a11y.
+* Added section for personal information.
+* Added email regex validation.
+* Populate preferred pronouns dropdown list from database table.
+	* **Assumption:** Field not marked as required to match task breakdown.
+* Populate level of study dropdown list from database table.
+* Added international student status radio buttons.
+* **Assumption:**  didn't match field name exactly for the sake of improved clarity.
+* Populate disability information checkbox list from database table.
+	* Implemented custom server-side and client-side validation to ensure at least one is selected.
+* Added additional accessibility requirements multi-line textbox.
+* Added consent section.
+	* **Assumption:** Used CAL intake form as a reference for contact information.
+* Added custom validation to check that full name and confirm full name are equal.
+* Added required validation to all required fields.
+* Submit creates a new submission record and redirects to submission list.
 
-Please note .NET Framework only runs on Windows, [unless you venture into other methods](https://hub.docker.com/r/microsoft/dotnet-framework).
+**Submission list page:**
+* Added responsive table to list basic submission information.
+* Added "View Details" action for each row
+	* **Assumption:** I labelled them "View Details" instead of "View" to improve clarity.
+* Implemented a limit of 3 disabilities before an ellipses is used, to keep table concise since "View Details" shows the full list.
+* Implemented a 200 character limit on additional requirements before an ellipses is used.
+* Add a "New Application" button that goes to registration page.
 
-## Requirements
+**Details page:**
+* **Assumption:** I didn't display a "full populated form" per-say, rather it just shows all the information in a formatted view. If I had more time I would have matched this idea closer and/or double-checked what the expected result of this feature is.
+* Uses query parameter to fetch and display all submission data.
+* Sends a 404 status if query parameter is missing/invalid.
+	* If I had more time I would have liked to have a proper 404 page.
 
-### Technology Stack
-
-- **Language:** C# (.NET Framework 4.8)
-- **Database:** Microsoft SQL Server
-- **ORM:** Entity Framework (**Database-First**)
-- **Front-end:** ASP.NET Web Forms
-
-## Test Overview
-
-You are required to create two pages in the web application:
-
-1. A **Registration Form** where users can submit their details.
-2. A **Submissions List** page that displays submitted data in a table.
-
-Some starter code has been provided to you in this repository.
-
-### Key Points
-
-- Ensure that your application is accessible and follows **WCAG standards**. Also use WCAG compliant error messages if any implemented.
-- Use various form inputs (text fields, dropdowns, radio buttons, checkboxes).
-- Data must be stored in an **MS SQL Server** database using **Entity Framework** for database interaction.
-
-## Task Breakdown
-
-### Page 1: Registration Form
-
-Create a registration form with the following fields:
-
-- **First name** (Required; Text input)
-- **Last name** (Required; Text input)
-- **Email** (Required; Text email input)
-- **Preferred Pronouns** (Dropdown list or radio buttons)
-- **Level of Study** (Required; Dropdown list or radio buttons)
-  - High school graduate
-  - Undergraduate
-  - Graduate
-- **International Student Status** (Required; Yes or No; radio buttons)
-- **Disability Information:**
-  - **Disability Type** (Required; Dropdown list as a multi-select or checkbox buttons)
-    - ADHD
-    - Autism
-    - Chronic illness
-    - Deaf or hard of hearing
-    - Learning disability
-    - Mental health
-    - Neurological
-    - Physical or mobility
-    - Vision
-    - Other
-  - **Additional Accessibility Requirements** (multiline text area)
-- **Consent** (Required)
-  - **Consent Information** (Text paragraph)
-  - **Full Name** (Text input)
-  - **Confirm Full Name** (Text input)
-
-### Page 2: Submissions List
-
-Create a second page that displays the submitted form data in a table format. Additionally, create a "View" button that when clicked sends the user to the full populated form.
-
-#### Details to Display in the Table
-
-- **First name**
-- **Last name**
-- **Email**
-- **Level of Study**
-- **Disability Type**
-- **Additional Requirements**
-
-## Additional Requirements
-
-### 1. Entity Framework
-
-- Use Entity Framework to interact with the SQL Server database.
-- Define a model that maps to the form submission table.
-
-### 2. Database
-
-You will need to create a simple SQL Server database to store form submissions. It is required you name this database `TechnicalTestDb`, and the data model `TechnicalTestDbEntities`. The table structure below has some suggestions to design the table for form submissions.
-
-- **Table Structure:**
-  - **Id** (Primary Key, number)
-  - **Name** (varchar)
-  - **Email** (varchar)
-  - **DisabilityType** (narchar or number with foreign key constraint)
-  - **AdditionalAccessibilityRequirements** (varchar)
-
-Feel free to use as many tables as you need in your solution.
-
-## Deliverables
-
-- A link to the fork of this repository with your solution. Ensure the project can be run locally with minimal configuration.
-- A SQL script that generates the necessary table(s) in MS SQL Server, or a database backup file.
-- A brief document outlining how the candidate ensured WCAG accessibility compliance.
-
-## Bonus Points
-
-- Include unit tests for form validation logic.
-- Any accessibility features you use in your implementation.
+**Tests:**
+* As of now, none were implemented.
