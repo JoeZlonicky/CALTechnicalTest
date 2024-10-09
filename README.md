@@ -85,3 +85,16 @@ The following was taken into consideration regarding accessability:
 
 **Tests:**
 * As of now, none were implemented.
+
+## Screenshots
+**Registration**
+![Registration screen](.github/screenshots/register.png)
+
+**Submission List**
+![Submission list screen](.github/screenshots/list.png)
+
+**Details**
+![Details screen](.github/screenshots/details.png)
+
+**Home page (mobile)**
+![Home page screen on mobile](.github/screenshots/home_mobile.png)
